@@ -1,5 +1,7 @@
 # 💰 Financial Records Management API
 
+**🟢 Live API Endpoint:** [https://backendassignment-fnqd.onrender.com](https://backendassignment-fnqd.onrender.com)
+
 A RESTful backend API built with **Node.js**, **Express**, and **MongoDB** for managing financial records (income & expenses). Features JWT-based authentication, role-based access control (RBAC), user management, and a dashboard with aggregated analytics.
 
 ---
@@ -148,7 +150,8 @@ The server will start at `http://localhost:5000`.
 
 ## 📡 API Endpoints
 
-> **Base URL:** `http://localhost:5000/api`
+> **Base URL (Local):** `http://localhost:5000/api`
+> **Base URL (Live):** `https://backendassignment-fnqd.onrender.com/api`
 
 All protected routes require a `Bearer` token in the `Authorization` header:
 

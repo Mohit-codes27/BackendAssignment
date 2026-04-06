@@ -6,7 +6,7 @@ const createRecord = async (req, res, next) => {
   try {
     const record = await Record.create({
       ...req.body,
-      user: req.user.id,
+      userId: req.user.id,
     });
     return res.status(201)
       .json(new ApiResponse(
@@ -27,6 +27,10 @@ const getRecords = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 5;
 
     let filter = {};
+
+    if(req.user.role !== "admin"){
+      filter.userId = req.user.id;
+    }
 
     if (type) filter.type = type;
     if (category) filter.category = category;
@@ -57,7 +61,7 @@ const getRecords = async (req, res, next) => {
 // Update a record
 const updateRecord = async (req, res, next) => {
   try {
-    const record = new Record.findByIdAndUpdate(
+    const record = await Record.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -81,7 +85,7 @@ const updateRecord = async (req, res, next) => {
 // Delete a record
 const deleteRecord = async (req, res, next) => {
   try {
-    const record = await Record.findOneAndDelete(req.params.id);
+    const record = await Record.findByIdAndDelete(req.params.id);
 
     if (!record) {
       throw new ApiError(404, "Record not found or unauthorized.");

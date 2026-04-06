@@ -28,6 +28,17 @@ app.use("/api/dashboard", dashboardRoutes);
 // Error handling middleware
 app.use(errorMiddleware);
 
+app.get("/", (req, res) => {
+  res.json({
+    message: "Financial Records API is running 🚀",
+    endpoints: {
+      auth: "/api/auth",
+      records: "/api/records",
+      dashboard: "/api/dashboard"
+    }
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
